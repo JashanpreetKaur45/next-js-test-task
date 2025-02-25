@@ -9,7 +9,7 @@ export const registerUser = createAsyncThunk(
       const state = getState() as RootState;
       const userData = state.onboarding; // Get data from Redux store
       console.log(userData,"thunk---------------")
-      const res = await fetch("http://localhost:5000/register", {
+      const res = await fetch("https://next-js-backend-wbui.vercel.app/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
@@ -33,7 +33,7 @@ export const verifyOtp = createAsyncThunk(
   async ({ email, otp }: { email: string; otp: string }, { rejectWithValue }) => {
 
     try {
-      const res = await fetch("http://localhost:5000/verify", {
+      const res = await fetch("https://next-js-backend-wbui.vercel.app/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, otp }),
