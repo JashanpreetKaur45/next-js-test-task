@@ -1,10 +1,13 @@
 "use client";
 import Image from "next/image";
 
-export default function EmailTemplate({ name }: { name: string }) {
+export default function WelcomePage({ params }: { params: { name: string } }) {
+  return <EmailTemplate name={params.name} />;
+}
+
+function EmailTemplate({ name }: { name: string }) {
   return (
     <div className="max-w-2xl mx-auto bg-white p-6 shadow-lg rounded-lg border border-gray-200">
-      {/* Header with Logo */}
       <div className="flex justify-center items-center">
         <Image src="/logo.png" alt="Paths Logo" width={120} height={50} />
       </div>
