@@ -1,11 +1,21 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { verifyOtp } from "../../redux/thunk/createOnBoardingThunk";
 import router from "next/router";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
+
+export default function VerifyEmailComponent() {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <VerifyEmailPage />
+    </Suspense>
+  );
+}
 
 const VerifyEmailPage = () => {
   const searchParams = useSearchParams();
@@ -96,7 +106,9 @@ const VerifyEmailPage = () => {
             onChange={(e) => handleChange(index, e)}
             onKeyDown={(e) => handleKeyDown(index, e)}
             maxLength={1}
-            ref={(el) => (inputRefs.current[index] = el)}
+            ref={(el) => {
+              inputRefs.current[index] = el;
+            }}
             className="w-10 h-10 border border-gray-300 text-center text-lg"
           />
         ))}
@@ -117,4 +129,4 @@ const VerifyEmailPage = () => {
   );
 };
 
-export default VerifyEmailPage;
+

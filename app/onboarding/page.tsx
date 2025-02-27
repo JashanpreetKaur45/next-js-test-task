@@ -3,22 +3,21 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Stepper from "../components/stepper";
 import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch } from "../redux/store";
 import { updateField } from "../redux/slice/onboardingSlice";
 import { registerUser } from "../redux/thunk/createOnBoardingThunk";
 import Image from "next/image";
 
 export default function Page() {
   const router = useRouter();
-  const email = useSelector((state: any) => state.onboarding.email);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+
   const loading = useSelector((state: any) => state.onboarding.loading);
   const error = useSelector((state: any) => state.onboarding.error);
-
-  const [localError, setLocalError] = useState<string | null>(null);
-
+  const email = useSelector((state: any) => state.onboarding.email);
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateField({ field: "email", value: e.target.value }));
-  };
+  }
 
   const handleSubmit = async () => {
     if (!email) {
@@ -26,8 +25,8 @@ export default function Page() {
       return;
     }
     try {
-      const resultAction = await dispatch(registerUser());
-      const result:any = await resultAction.payload;
+      const resultAction = dispatch(registerUser());
+      const result:any = await (await resultAction).payload;
       console.log(error)
       if (result?.message === "User registered, OTP sent") {
         router.push(`/onboarding/verifyEmail?email=${encodeURIComponent(email)}`);

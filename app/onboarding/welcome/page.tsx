@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
 
-export default function WelcomePage({ params }: { params: { name: string } }) {
-  return <EmailTemplate name={params.name} />;
+export default function WelcomePage() {
+  return <EmailTemplate/>;
 }
 
-function EmailTemplate({ name }: { name: string }) {
+function EmailTemplate() {
   return (
     <div className="max-w-2xl mx-auto bg-white p-6 shadow-lg rounded-lg border border-gray-200">
       <div className="flex justify-center items-center">
@@ -17,7 +17,7 @@ function EmailTemplate({ name }: { name: string }) {
       <h1 className="text-2xl font-bold mt-4 text-center">Welcome!</h1>
 
       {/* Dynamic User Name */}
-      <p className="mt-4 text-gray-800 text-left">Hi <span className="font-semibold">{name}</span>,</p>
+      <p className="mt-4 text-gray-800 text-left">Hi </p>
 
       {/* Introduction */}
       <p className="mt-4 text-gray-700 text-left">

@@ -47,8 +47,7 @@ export const onboardingSlice = createSlice({
   initialState,
   reducers: {
     updateField: (state, action: PayloadAction<{ field: keyof OnboardingState; value: any }>) => {
-        console.log(state, action)
-      state[action.payload.field] = action.payload.value;
+      (state[action.payload.field] as any) = action.payload.value;
     },
     resetOnboarding: () => initialState,
   },
